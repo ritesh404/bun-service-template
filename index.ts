@@ -1,8 +1,8 @@
 import express from "express";
 import { addMiddleware, start } from "./src/server";
-import requestLogger from "./src/middlewares/requestLogger";
-import logger from "./src/loggers";
-import errorLogger from "./src/middlewares/errorLogger";
+import requestLogger from "./src/middleware/requestLogger";
+import logger from "./src/logger";
+import errorLogger from "./src/middleware/errorLogger";
 import setupRouting from "./src/routing";
 
 function startup() {

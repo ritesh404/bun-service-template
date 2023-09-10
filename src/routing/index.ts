@@ -1,4 +1,4 @@
-import { setGetRoute } from "../server";
+import { setGetRoute } from "@/server";
 
 export default function setupRouting() {
   setGetRoute("/health", function (req, res) {

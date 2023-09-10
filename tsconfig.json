@@ -15,6 +15,15 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/middleware/*": ["src/middleware/*"],
+      "@/persistance/*": ["src/persistance/*"],
+      "@/routing/*": ["src/routing/*"],
+      "@/types/*": ["src/types/*"],
+      "@/logger/*": ["src/logger/*"],
+      "@/server": ["src/server"]
+    },
     "types": [
       "bun-types" // add Bun global
     ]
