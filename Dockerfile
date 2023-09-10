@@ -4,4 +4,4 @@ WORKDIR /app
 USER bun
 COPY --chown=bun:bun . /app
 RUN bun install 
-CMD ["bun", "index.ts"]
+CMD ["bun", "run", "start:migrate"]
