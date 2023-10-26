@@ -1,16 +1,9 @@
-import { NextFunction, Request, Response } from "express";
-import logger from "@/logger/index";
+import logger from "../logger";
+import { ErrorContextType } from "@/types/server";
 
-export default function errorLogger(
-  err: Error,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export default async function errorLogger(ctx: ErrorContextType) {
   logger.error({
-    stack: err.stack,
-    message: err.message,
+    stack: ctx.error?.stack,
+    message: ctx.error?.message,
   });
-
-  next();
 }

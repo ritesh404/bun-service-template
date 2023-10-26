@@ -1,10 +1,11 @@
 ## Template
 
-Template to create a node service
+Template to create a bun service
 
+- express web server
 - Connect to postgress DB
-- Prisma for ORM and migrations
-- Logging via winston
+- Drizzle for ORM and migrations
+- Logging via pino
 
 To install dependencies:
 
@@ -15,21 +16,35 @@ bun install
 To run:
 
 ```bash
-bun run index.ts
+bun start
+```
+
+To run in dev:
+
+```bash
+bun run dev
 ```
 
 This project was created using `bun init` in bun v1.0.0. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
 
 run following command to initiate migrations once a schema is setup
 
+Create migrations using
+
 ```bash
-bunx prisma migrate dev --name init
+bun run generate
 ```
 
-Access prisma studio
+Run migrations
 
 ```bash
-bunx prisma studio
+bun run migrate
+```
+
+Access drizzle kit studio
+
+```bash
+bunx drizzle-kit studio
 ```
 
 Build using docker

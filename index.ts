@@ -1,21 +1,26 @@
 import express from "express";
-import { addMiddleware, start } from "./src/server";
-import requestLogger from "./src/middleware/requestLogger";
-import logger from "./src/logger";
-import errorLogger from "./src/middleware/errorLogger";
+import {
+  addGlobalErrorHandler,
+  addPreRequestHandler,
+  rawServer,
+  start,
+} from "./src/server";
 import setupRouting from "./src/routing";
+import requestLogger from "@/middleware/requestLogger";
+import errorLogger from "@/middleware/errorLogger";
+import logger from "./src/logger";
 
 function startup() {
-  addMiddleware(express.json());
-  addMiddleware(express.urlencoded());
-  addMiddleware(requestLogger);
-  addMiddleware(errorLogger);
+  rawServer().use(express.json());
+  rawServer().use(express.urlencoded());
+  addPreRequestHandler(requestLogger);
 
   setupRouting();
+  addGlobalErrorHandler(errorLogger);
 
   if (!process.env.PORT) throw Error("PORT is missing");
   else
-    start(Number(process.env.PORT), () => {
+    start({ port: Number(process.env.PORT) }, () => {
       logger.info(`Starting server at ${process.env.PORT}`);
     });
 }

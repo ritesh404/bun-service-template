@@ -1,19 +1,14 @@
-import { NextFunction, Request, Response } from "express";
-import logger from "@/logger/index";
+import logger from "../logger";
+import { RequestContextType } from "@/types/server";
 
-export default function requestLogger(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export default async function requestLogger(ctx: RequestContextType) {
+  const req = ctx.request;
   logger.info({
     method: req.method,
-    url: req.originalUrl,
-    params: req.params,
-    query: req.query,
+    url: req.url,
+    params: ctx.params,
+    query: ctx.query,
     body: req.body,
     ip: req.ip,
   });
-
-  next();
 }

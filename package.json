@@ -3,10 +3,12 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun --hot run index.ts",
+    "dev": "bun --hot index.ts",
     "start": "bun index.ts",
-    "migrate": "prisma migrate deploy",
-    "start:migrate": "bun run migrate && bun run start"
+    "start:migrate": "bun run migrate && bun run start",
+    "introspect": "drizzle-kit introspect:pg --config=drizzle.config.ts",
+    "generate": "drizzle-kit generate:pg --config=drizzle.config.ts",
+    "migrate": "bun migrate.ts"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
@@ -17,8 +19,10 @@
   },
   "dependencies": {
     "@prisma/client": "^5.2.0",
+    "drizzle-orm": "^0.28.6",
     "express": "^4.18.2",
-    "prisma": "^5.2.0",
-    "winston": "^3.10.0"
+    "pg": "^8.11.3",
+    "pino": "^8.16.1",
+    "postgres": "^3.4.1"
   }
 }

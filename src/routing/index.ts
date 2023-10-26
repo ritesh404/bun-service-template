@@ -1,8 +1,8 @@
 import { setGetRoute } from "@/server";
 
 export default function setupRouting() {
-  setGetRoute("/health", function (req, res) {
-    res.json({ status: "alive" });
+  setGetRoute("/health", async function (req) {
+    return { status: 200, body: { status: "alive" } };
   });
 
   // setup additional routes here
