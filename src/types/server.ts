@@ -23,7 +23,7 @@ export type ResponseContextType<RequestType = Request> = {
 };
 
 export type ResponseType<ResponseBody> = {
-  body?: ResponseBody;
+  body?: { error?: string; data?: ResponseBody };
   headers?: HeadersType;
   status?: number;
 };

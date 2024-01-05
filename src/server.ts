@@ -4,7 +4,6 @@ import {
   RequestHandlerType,
   ResponseHandlerType,
 } from "./types/server";
-import errorLogger from "./middleware/errorLogger";
 
 const app = express();
 
@@ -29,9 +28,14 @@ function commonHandler<ResponseBody>(fn: RequestHandlerType<ResponseBody>) {
               res.set(key, value);
             });
           }
-          res.status(response?.status || 500).json(response.body);
-          if (response.status && response.status >= 400)
-            errorLogger({ error: new Error(JSON.stringify(response)) });
+
+          if (response.status && response.status >= 400) {
+            if (response?.body?.error) next(new Error(response.body.error));
+            else next(new Error("Something went wrong"));
+            res.status(response.status).json(response.body?.error);
+          } else {
+            res.status(response?.status || 500).json(response.body?.data || {});
+          }
         }
         next();
       })
